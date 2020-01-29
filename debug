@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Yaml\Yaml;
+
+require_once(__DIR__.'/init.php');
+
+$config = fetch_config();
+$keypair = keypair($config);
+$debug = [];
+
+foreach (get_repositories($config) as $repoName => $secrets) {
+    $debug[$repoName] = [];
+    foreach ($secrets as $name => $file) {
+        if ($file === null) {
+            $debug[$repoName][$name] = null;
+        } else {
+            $debug[$repoName][$name] = fetch_secret($keypair, $file);
+        }
+    }
+}
+
+print Yaml::dump($debug);
+

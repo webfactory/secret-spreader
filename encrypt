@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php
+
+require_once(__DIR__.'/init.php');
+
+print encrypt_64(
+        file_get_contents('php://stdin'),
+        public_key(fetch_config())
+    ) . "\n";
+

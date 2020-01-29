@@ -1,0 +1,53 @@
+#!/usr/bin/env php
+<?php
+
+use GuzzleHttp\Client;
+
+require_once(__DIR__.'/init.php');
+
+if (!$githubToken = getenv('SPREAD_GITHUB_TOKEN')) {
+    fail('The GitHub access token must be provided through the SPREAD_GITHUB_TOKEN environment variable');
+}
+
+$client = new Client([
+    // Base URI is used with relative requests
+    'base_uri' => 'https://api.github.com',
+    'auth' => ['', $githubToken],
+]);
+
+$config = fetch_config();
+$keypair = keypair($config);
+
+foreach (get_repositories($config) as $repo => $repoConfig) {
+    print "$repo:\n";
+
+    [$keyId, $repoPublicKey] = fetch_repo_key($client, $repo);
+    $updateTimes = fetch_secret_update_times($client, $repo);
+
+    foreach ($repoConfig as $secretName => $file) {
+        if ($file === null) {
+            if (isset($updateTimes[$secretName])) {
+                print "\t- $secretName: deleting\n";
+                delete_secret($client, $repo, $secretName);
+            } else {
+                print "\t- $secretName: already deleted\n";
+            }
+            continue;
+        }
+
+        if (!file_exists($file)) {
+            print "\t- $secretName: file '$file' does not exist, skipping\n";
+            continue;
+        }
+
+        if (($updateTimes[$secretName] ?? 0) >= filemtime($file)) {
+            print "\t- $secretName: up to date\n";
+            continue;
+        }
+
+        print "\t- $secretName: updating\n";
+        $secretValue = fetch_secret($keypair, $file);
+        $encryptedValue = encrypt_64($secretValue, $repoPublicKey);
+        put_secret($client, $repo, $secretName, $encryptedValue, $keyId);
+    }
+}

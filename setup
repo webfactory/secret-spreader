@@ -1,0 +1,32 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Yaml\Yaml;
+
+require_once(__DIR__.'/init.php');
+
+if (file_exists('spreaded-secrets.yml')) {
+    fail('The `spreaded-secrets.yml` config file already exists. Aborting.');
+}
+
+$keypair = sodium_crypto_box_keypair();
+$pk = base64_encode(sodium_crypto_box_publickey($keypair));
+$sk = base64_encode(sodium_crypto_box_secretkey($keypair));
+
+file_put_contents('spreaded-secrets.yml', Yaml::dump([
+        'public-key' => $pk,
+        'repositories' => [
+            'octocat/example-repo' => [
+                'FIRST_SECRET' => 'secret-file',
+                'ANOTHER_SECRET' => 'another-file',
+            ]
+        ]], 4));
+
+print "The `spreaded-secrets.yml` config file has been initialized.\n";
+print "You probably want to `git add` it now.\n";
+print "The PRIVATE KEY needed to decrypt your secrets is:\n";
+print "$sk\n";
+print "!!! DO NOT COMMIT THIS KEY INTO YOUR REPOSITORY.\n";
+print "Store it in a safe place. It will be needed to distribute the secrets in the future.\n";
+print "If this private key is lost, all the secret values encrypted with it are lost as well.\n";
+
