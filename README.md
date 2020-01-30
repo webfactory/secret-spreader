@@ -3,6 +3,8 @@
 
 This tool can be used to keep a set of secret values in a Git repository. These secret values can then be distributed as [GitHub Actions Secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) to a range of GitHub repositories.
 
+**Attention** *This tool is in a very early development phase. Significant changes to usage, applicability, configuration syntax etc. may be possible and can happen on short or without prior notice.*
+
 ## Why?
 
 When using GitHub Actions to build, test or deploy your software, you will probably need to have access tokens, SSH deployment keys or other secret data available. Chances are that some of these secrets will be used on more than just one or a few repositories. 
