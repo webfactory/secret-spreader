@@ -132,7 +132,7 @@ If you want to remove a particular secret from a repository, use `~` as the file
 
 Try this and remove the `DEMO` secret from your config repository.
 
-### Write a REAME ⭐️
+### Write a README ⭐️
 
 If you want to do your future self and/or your colleagues a favor, update the `README` file in your config repository fork.
 
