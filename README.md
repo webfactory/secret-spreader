@@ -1,7 +1,9 @@
 ![webfactory Logo](https://www.webfactory.de/bundles/webfactorytwiglayout/img/logo.png) 
 # `secret-spreader` for GitHub Actions
 
-This tool can be used to keep a set of secret values in a Git repository. These secret values can then be distributed as [GitHub Actions Secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) to a range of GitHub repositories.
+With this tool, you can keep a list of secret values in a Git repository. These secret values can then be distributed
+as [GitHub Actions Secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
+to a list of GitHub repositories, maintained in a config file.
 
 **Attention** *This tool is in a very early development phase. Significant changes to usage, applicability, configuration syntax etc. may be possible and can happen on short or without prior notice.*
 
