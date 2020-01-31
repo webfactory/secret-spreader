@@ -89,23 +89,12 @@ function list_secrets(Client $client, string $repo): array
         $body = $client->request('GET', "/repos/$repo/actions/secrets")->getBody();
         $data = json_decode($body, true);
 
-        return $data['secrets'];
+        $names = array_map(function ($entry) {return $entry['name'];}, $data['secrets']);
+
+        return array_combine($names, $names);
     } catch (ClientException $exception) {
         fail("Failed to fetch existing secrets for the '$repo' repository from the API", $exception);
     }
-}
-
-function fetch_secret_update_times(Client $client, string $repo): array
-{
-    $updateTimes = [];
-    $secrets = list_secrets($client, $repo);
-    foreach ($secrets as $secret) {
-        $updateTime = new DateTime($secret['updated_at']);
-        $updateTime->modify('+8 hours'); // fix API bug
-        $updateTimes[$secret['name']] = $updateTime->getTimestamp();
-    }
-
-    return $updateTimes;
 }
 
 function fetch_repo_key(Client $client, string $repo): array

@@ -22,11 +22,11 @@ foreach (get_repositories($config) as $repo => $repoConfig) {
     print "$repo:\n";
 
     [$keyId, $repoPublicKey] = fetch_repo_key($client, $repo);
-    $updateTimes = fetch_secret_update_times($client, $repo);
+    $availableSecrets = list_secrets($client, $repo);
 
     foreach ($repoConfig as $secretName => $file) {
         if ($file === null) {
-            if (isset($updateTimes[$secretName])) {
+            if (isset($availableSecrets[$secretName])) {
                 print "\t- $secretName: deleting\n";
                 delete_secret($client, $repo, $secretName);
             } else {
@@ -37,11 +37,6 @@ foreach (get_repositories($config) as $repo => $repoConfig) {
 
         if (!file_exists($file)) {
             print "\t- $secretName: file '$file' does not exist, skipping\n";
-            continue;
-        }
-
-        if (($updateTimes[$secretName] ?? 0) >= filemtime($file)) {
-            print "\t- $secretName: up to date\n";
             continue;
         }
 
