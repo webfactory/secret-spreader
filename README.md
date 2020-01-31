@@ -30,7 +30,7 @@ Along with these secrets goes a configuration file that describes which secret n
 
 This approach follows the "Infrastructure as Code" philosophy: The configuration file gives you an up-to-date list of who is using which secret. Having it under version control means you can track who changed what, and you can also revert changes in case something breaks.
 
-### DevOps Ninja Extra Credits 🚀
+### DevOps ninja extra credits 🚀
 
 Use GitHub Actions on your "secrets management" repository to roll out the updates whenever changes to the secrets and/or the configuration are committed.
 
@@ -47,7 +47,7 @@ repository that [can easily be forked](https://github.com/webfactory/secret-spre
 
 Then, clone this config repository to your local machine using `git clone <URL-of-your-fork>` and `cd` into it. 
 
-### Initialize `secret-spreader` as a Git Submodule
+### Initialize `secret-spreader` as a `git submodule`
 
 To make `secret-spreader` easily available, run this in your config repository working area:
 
@@ -141,7 +141,7 @@ all the nitty-gritty details necessary to make things work for you 🦖.
 
 ## Credits, Copyright and License
 
-This action was written by webfactory GmbH, Bonn, Germany. We're a software development
+This tool was written by webfactory GmbH, Bonn, Germany. We're a software development
 agency with a focus on PHP (mostly [Symfony](http://github.com/symfony/symfony)). If you're a 
 developer looking for new challenges, we'd like to hear from you! 
 
