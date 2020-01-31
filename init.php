@@ -89,7 +89,7 @@ function list_secrets(Client $client, string $repo): array
         $body = $client->request('GET', "/repos/$repo/actions/secrets")->getBody();
         $data = json_decode($body, true);
 
-        $names = array_map(function ($entry) {return $entry['name'];}, $data['secrets']);
+        $names = array_map(function ($entry) {return $entry['name']; }, $data['secrets']);
 
         return array_combine($names, $names);
     } catch (ClientException $exception) {
