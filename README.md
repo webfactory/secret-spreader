@@ -56,7 +56,7 @@ To make `secret-spreader` easily available, run this in your config repository w
 ```shell script
 git submodule add https://github.com/webfactory/github-secret-spreader.git bin
 cd bin
-git checkout 0.1.0
+git checkout 0.1.1
 cd ..
 git commit -m "Setup secret-spreader submodule" bin
 ```
