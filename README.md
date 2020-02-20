@@ -89,12 +89,10 @@ To see everything is working correctly, let's use `secret-spreader` to add a `DE
 Still in your local working area, run this command:
 
 ```shell
-bin/encrypt > demo-secret <<EOF
-> dont tell mum
-> EOF  
+echo -n 'dont tell mum' | bin/encrypt > demo-secret
 ```
 
-This will pass the string `dont tell mum` (plus a trailing newline, FWIW) through `bin/encrypt`. That script will _encrypt_ the secret value
+This will pass the string `dont tell mum` through `bin/encrypt`. That script will _encrypt_ the secret value
 and write the resulting (encrypted) value to standard output, which in turn is redirected into the file `demo-secret`. 
 
 Now, edit `spreaded-secrets.yml`:
