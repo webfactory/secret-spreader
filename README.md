@@ -7,6 +7,8 @@ to a list of GitHub repositories, maintained in a config file.
 
 **Attention** *This tool is in a very early development phase. Significant changes to usage, applicability, configuration syntax etc. may be possible and can happen on short or without prior notice.*
 
+**Update 2020-05-14** GitHub [added secrets at the organization level](https://github.blog/changelog/2020-05-14-organization-secrets/) as a native feature for Action. You might be better off working with that officially supported feature instead of using this tool. 
+
 ## Why?
 
 When using GitHub Actions to build, test or deploy your software, you will probably need to have access tokens, SSH deployment keys or other secret data available. Chances are that some of these secrets will be used on more than just one or a few repositories. 
