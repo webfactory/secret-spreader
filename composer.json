@@ -1,12 +1,11 @@
 {
     "require": {
-        "guzzlehttp/guzzle": "^6.5",
-        "symfony/yaml": "^5.0"
+        "php": "^7.2.5|8.0.*|8.1.*",
+        "ext-sodium": "*",
+        "guzzlehttp/guzzle": "^7.4",
+        "symfony/yaml": "^5.4"
     },
     "config": {
-        "sort-packages": true,
-        "platform": {
-            "php": "7.2.24"
-        }
+        "sort-packages": true
     }
 }

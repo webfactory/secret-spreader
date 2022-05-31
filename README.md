@@ -40,7 +40,7 @@ Use GitHub Actions on your "secrets management" repository to roll out the updat
 
 ## Usage
 
-### Have PHP 7.2+ installed 
+### Have PHP ^7.2.5 installed
 
 _For now, we'll just assume this is the case._ (TODO) 
 
@@ -152,4 +152,4 @@ developer looking for new challenges, we'd like to hear from you!
 - <https://www.webfactory.de>
 - <https://twitter.com/webfactory>
 
-Copyright 2020 webfactory GmbH, Bonn. Code released under [the MIT license](LICENSE).
+Copyright 2020 – 2022 webfactory GmbH, Bonn. Code released under [the MIT license](LICENSE).
